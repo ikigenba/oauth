@@ -13,5 +13,4 @@ anchored grep matches only phase lines.
 
 Next phase: 06
 
-- Phase 04 ⬜ realizes D6, D5 (slice) — cmd/oauth-login: flags, composition, streams, exits
 - Phase 05 ⬜ realizes D7 — the live smoke against a real provider
