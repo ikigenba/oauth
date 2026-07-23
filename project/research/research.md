@@ -1,4 +1,4 @@
-# login — Research
+# oauth — Research
 
 Collected external ground truth that `project/design/` references instead of
 re-deriving. Non-contractual: the build loop never reads this file. It holds
@@ -35,7 +35,7 @@ recorded here exactly rather than reconstructed:
 | `code_challenge` | `E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM` |
 
 **Defined `code_challenge_method` values**: `plain` and `S256`. `S256` is
-Mandatory To Implement on servers. `login` sends `S256` only and offers
+Mandatory To Implement on servers. `oauth` sends `S256` only and offers
 no way to select `plain`; the weaker method exists in the RFC for clients that
 cannot compute SHA-256, which is not a constraint we have.
 
@@ -121,7 +121,7 @@ motivated this project is that agentkit expects a top-level `account_id` in the
 token response, which OpenAI's token endpoint does not return; the value lives
 as the `chatgpt_account_id` claim inside the returned JWTs, under the claim key
 `https://api.openai.com/auth`. Recorded here only to document why
-`login` deliberately never parses the token response: the enrichment that
+`oauth` deliberately never parses the token response: the enrichment that
 would be needed is provider-specific, and belongs to the consumer.
 
 ## Unconfirmed

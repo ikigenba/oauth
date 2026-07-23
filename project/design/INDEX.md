@@ -1,4 +1,4 @@
-# login — Design Index
+# oauth — Design Index
 
 Each Decision maps to its `DNN.md` file; every minted `R-nnnn-nnnn` id maps to
 the Decision that owns it and the file it lives in. Id lookup is a grep against

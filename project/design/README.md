@@ -1,7 +1,7 @@
-# login — Design
+# oauth — Design
 
 **Authority: shape and its proof.** This document and the `project/design/`
-directory own *how* `login` is built and *how each behavior is proven* —
+directory own *how* `oauth` is built and *how each behavior is proven* —
 seams, interfaces, types, naming, and the test strategy. `project/product/`
 owns the why and the promises; design states the exact, checkable form of those
 promises and never re-declares the why. Design uses the product's contractual
@@ -33,7 +33,7 @@ are deliberately not specified here.
 Facts every Decision leans on.
 
 - **Language / toolchain** — Go 1.26.2. Module path
-  `github.com/ikigenba/login`.
+  `github.com/ikigenba/oauth`.
 - **Build / typecheck command** — `go build ./...` and `go vet ./...`.
 - **Test command** — `go test ./...`.
 - **The suite is green** when all four of these exit 0 / produce no output:
@@ -61,14 +61,14 @@ Facts every Decision leans on.
   so a redirected `> auth.json` never receives both a token response and a
   version string.
 - **Version symbol** — the binary's version is the package-level
-  `var version = "dev"` in `cmd/login`. The build overrides it via
+  `var version = "dev"` in `cmd/oauth`. The build overrides it via
   `-ldflags "-X main.version=<v>"`; nothing else assigns it. D6 reads it (the
   `-V` action); D8 supplies it (the `Makefile` stamps
   `git describe --tags --always --dirty`, goreleaser stamps the release tag).
   Unstamped builds keep the `dev` sentinel.
 - **Injected seams** — entropy is an `io.Reader`, the browser launcher is an
   interface, and the callback wait deadline is supplied by the caller. Each is
-  defaulted at the composition root in `cmd/login` and substituted in
+  defaulted at the composition root in `cmd/oauth` and substituted in
   tests; no package reaches for `crypto/rand`, `exec.Command`, or wall-clock
   time on its own.
 - **Provider neutrality** — no package may contain a provider name, endpoint,

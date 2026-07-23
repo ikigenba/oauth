@@ -1,3 +1,3 @@
-module github.com/ikigenba/login
+module github.com/ikigenba/oauth
 
 go 1.26.2

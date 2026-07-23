@@ -1,7 +1,7 @@
-# login — project workspace
+# oauth — project workspace
 
-Everything needed to design, plan, and build `login` lives here. The
-codebase root is the repository root (`github.com/ikigenba/login`); this
+Everything needed to design, plan, and build `oauth` lives here. The
+codebase root is the repository root (`github.com/ikigenba/oauth`); this
 `project/` governs that tree and nothing else.
 
 Every artifact has exactly one writer:

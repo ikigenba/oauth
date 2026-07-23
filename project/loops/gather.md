@@ -4,7 +4,7 @@ model: claude-sonnet-5
 ---
 # Gather — author the phase brief
 
-You are the **gather** step of the `login` build loop. You run in a fresh,
+You are the **gather** step of the `oauth` build loop. You run in a fresh,
 isolated context, from the service root (the directory containing `project/`
 and `go.mod`). All paths below are service-root-relative.
 

@@ -2,11 +2,11 @@
 
 // Run the live login smoke test with:
 //
-//	go test -tags live ./cmd/login/ -run TestLiveLogin -v
+//	go test -tags live ./cmd/oauth/ -run TestLiveLogin -v
 //
-// Set OAUTH_LOGIN_LIVE_AUTH_URL, OAUTH_LOGIN_LIVE_TOKEN_URL,
-// OAUTH_LOGIN_LIVE_CLIENT_ID, OAUTH_LOGIN_LIVE_SCOPE,
-// OAUTH_LOGIN_LIVE_PORT, and OAUTH_LOGIN_LIVE_CALLBACK_PATH before running it.
+// Set OAUTH_LIVE_AUTH_URL, OAUTH_LIVE_TOKEN_URL,
+// OAUTH_LIVE_CLIENT_ID, OAUTH_LIVE_SCOPE,
+// OAUTH_LIVE_PORT, and OAUTH_LIVE_CALLBACK_PATH before running it.
 package main
 
 import (
@@ -22,12 +22,12 @@ import (
 func TestLiveLogin(t *testing.T) {
 	// R-2262-WKX9
 	const (
-		authURLEnv      = "OAUTH_LOGIN_LIVE_AUTH_URL"
-		tokenURLEnv     = "OAUTH_LOGIN_LIVE_TOKEN_URL"
-		clientIDEnv     = "OAUTH_LOGIN_LIVE_CLIENT_ID"
-		scopeEnv        = "OAUTH_LOGIN_LIVE_SCOPE"
-		portEnv         = "OAUTH_LOGIN_LIVE_PORT"
-		callbackPathEnv = "OAUTH_LOGIN_LIVE_CALLBACK_PATH"
+		authURLEnv      = "OAUTH_LIVE_AUTH_URL"
+		tokenURLEnv     = "OAUTH_LIVE_TOKEN_URL"
+		clientIDEnv     = "OAUTH_LIVE_CLIENT_ID"
+		scopeEnv        = "OAUTH_LIVE_SCOPE"
+		portEnv         = "OAUTH_LIVE_PORT"
+		callbackPathEnv = "OAUTH_LIVE_CALLBACK_PATH"
 	)
 
 	required := []string{authURLEnv, tokenURLEnv, clientIDEnv, scopeEnv, portEnv, callbackPathEnv}
@@ -40,13 +40,13 @@ func TestLiveLogin(t *testing.T) {
 		}
 	}
 	if len(missing) != 0 {
-		t.Skipf("live login requires these environment variables: %s", strings.Join(missing, ", "))
+		t.Skipf("live oauth requires these environment variables: %s", strings.Join(missing, ", "))
 	}
 
-	binary := filepath.Join(t.TempDir(), "login")
+	binary := filepath.Join(t.TempDir(), "oauth")
 	build := exec.Command("go", "build", "-o", binary, ".")
 	if output, err := build.CombinedOutput(); err != nil {
-		t.Fatalf("build login: %v\n%s", err, output)
+		t.Fatalf("build oauth: %v\n%s", err, output)
 	}
 
 	command := exec.Command(binary,
@@ -62,7 +62,7 @@ func TestLiveLogin(t *testing.T) {
 	command.Stdout = &stdout
 	command.Stderr = os.Stderr
 	if err := command.Run(); err != nil {
-		t.Fatalf("login exited unsuccessfully: %v", err)
+		t.Fatalf("oauth exited unsuccessfully: %v", err)
 	}
 
 	var response struct {

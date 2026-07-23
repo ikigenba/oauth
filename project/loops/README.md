@@ -1,4 +1,4 @@
-# login — the installed build loop
+# oauth — the installed build loop
 
 This directory holds the build loop as installed: three prompts, the operator
 wrapper that runs them, and this overview. It describes **this** loop, and it

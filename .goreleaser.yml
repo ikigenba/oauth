@@ -1,10 +1,10 @@
 version: 2
-project_name: login
+project_name: oauth
 
 builds:
-  - id: login
-    main: ./cmd/login
-    binary: login
+  - id: oauth
+    main: ./cmd/oauth
+    binary: oauth
     env:
       - CGO_ENABLED=0
     goos: [linux, darwin]
@@ -13,7 +13,7 @@ builds:
       - -s -w -X main.version={{ .Tag }}
 
 archives:
-  - id: login
+  - id: oauth
     formats: [tar.gz]
     name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
 
@@ -23,7 +23,7 @@ checksum:
 release:
   github:
     owner: ikigenba
-    name: login
+    name: oauth
 
 changelog:
   use: github

@@ -1,4 +1,4 @@
-# login — Plan
+# oauth — Plan
 
 **Authority: construction order.** This document and the `project/plan/`
 directory own the build order of **pending** work only. Completion is deletion:

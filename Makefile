@@ -1,4 +1,4 @@
-BINARY  := login
+BINARY  := oauth
 BIN_DIR := bin
 PREFIX  ?= $(HOME)/.local
 
@@ -8,7 +8,7 @@ build: $(BIN_DIR)/$(BINARY)
 
 $(BIN_DIR)/$(BINARY): go.mod $(wildcard go.sum) $(shell find cmd internal -name '*.go')
 	install -d $(BIN_DIR)
-	go build -ldflags "-X main.version=$(shell git describe --tags --always --dirty)" -o $(BIN_DIR)/$(BINARY) ./cmd/login
+	go build -ldflags "-X main.version=$(shell git describe --tags --always --dirty)" -o $(BIN_DIR)/$(BINARY) ./cmd/oauth
 
 fmt:
 	go fmt ./...

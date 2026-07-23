@@ -15,16 +15,16 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ikigenba/login/internal/browser"
-	"github.com/ikigenba/login/internal/callback"
-	"github.com/ikigenba/login/internal/oauth"
+	"github.com/ikigenba/oauth/internal/browser"
+	"github.com/ikigenba/oauth/internal/callback"
+	"github.com/ikigenba/oauth/internal/oauth"
 )
 
 var version = "dev"
 
 const helpExample = `
 Example:
-  login \
+  oauth \
     --auth-url  https://auth.openai.com/oauth/authorize \
     --token-url https://auth.openai.com/oauth/token \
     --client-id app_EMoamEEZ73f0CkXaXp7hrann \
@@ -201,7 +201,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer, deps depe
 
 func parseOptions(args []string, output io.Writer) (options, bool, error) {
 	var opts options
-	fs := flag.NewFlagSet("login", flag.ContinueOnError)
+	fs := flag.NewFlagSet("oauth", flag.ContinueOnError)
 	fs.SetOutput(output)
 	fs.StringVar(&opts.authURL, "auth-url", "", "authorization endpoint (required)")
 	fs.StringVar(&opts.tokenURL, "token-url", "", "token endpoint (required)")
@@ -218,7 +218,7 @@ func parseOptions(args []string, output io.Writer) (options, bool, error) {
 	fs.DurationVar(&opts.timeout, "timeout", 5*time.Minute, "maximum time to wait for the callback")
 	fs.BoolVar(&opts.showVersion, "V", false, "print version and exit")
 	fs.Usage = func() {
-		fmt.Fprintf(output, "Usage: login [flags]\n\nFlags:\n")
+		fmt.Fprintf(output, "Usage: oauth [flags]\n\nFlags:\n")
 		io.WriteString(output, helpFlags)
 		io.WriteString(output, helpExample)
 	}

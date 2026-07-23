@@ -31,10 +31,10 @@ func TestVersionFlagPrintsUnstampedVersionWithoutSideEffects(t *testing.T) {
 func TestStampedBinaryVersionFlagPrintsInjectedVersion(t *testing.T) {
 	// R-9DOF-95GF
 	const sentinel = "phase-07-stamped-version"
-	binary := filepath.Join(t.TempDir(), "login")
+	binary := filepath.Join(t.TempDir(), "oauth")
 	build := exec.Command("go", "build", "-ldflags", "-X main.version="+sentinel, "-o", binary, ".")
 	if output, err := build.CombinedOutput(); err != nil {
-		t.Fatalf("build stamped login: %v\n%s", err, output)
+		t.Fatalf("build stamped oauth: %v\n%s", err, output)
 	}
 
 	command := exec.Command(binary, "-V")
@@ -42,7 +42,7 @@ func TestStampedBinaryVersionFlagPrintsInjectedVersion(t *testing.T) {
 	command.Stdout = &stdout
 	command.Stderr = &stderr
 	if err := command.Run(); err != nil {
-		t.Fatalf("run stamped login: %v; stderr=%q", err, stderr.String())
+		t.Fatalf("run stamped oauth: %v; stderr=%q", err, stderr.String())
 	}
 	if stdout.String() != sentinel+"\n" {
 		t.Fatalf("stdout = %q, want %q", stdout.String(), sentinel+"\n")

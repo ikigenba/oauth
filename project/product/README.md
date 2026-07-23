@@ -1,6 +1,6 @@
-# login — Product
+# oauth — Product
 
-**Authority: intent.** This document owns *why* `login` exists, *for
+**Authority: intent.** This document owns *why* `oauth` exists, *for
 whom*, what is in and out of scope, and what we promise the user — stated once,
 in outcome terms. It does not own mechanism, exact wire formats, exit-code
 values, or test assertions; those belong to `project/design/`. Where the two
@@ -17,7 +17,7 @@ program — so a bug fixed in one copy survives in the others.
 
 ## Purpose
 
-`login` is a standalone command-line program that performs one job: run
+`oauth` is a standalone command-line program that performs one job: run
 the OAuth 2.0 authorization-code + PKCE login flow against any
 protocol-compliant service and hand the resulting token response back to
 whoever invoked it. It is a single reusable step, not a credential manager.
@@ -31,7 +31,7 @@ own OAuth implementation.
 
 ## Scope
 
-`login` performs the authorization-code + PKCE handshake for a service
+`oauth` performs the authorization-code + PKCE handshake for a service
 described entirely by its invocation flags, and emits the token endpoint's
 response to the caller. Its knowledge of the world is the OAuth protocol
 itself.
@@ -56,7 +56,7 @@ response — unmodified, exactly as the service returned it — on standard outp
 Nothing else is ever written there, so the output can be redirected straight to
 a file and be a faithful record of what the service said:
 
-    login <flags> > ~/.foo/auth.json
+    oauth <flags> > ~/.foo/auth.json
 
 Everything meant for a human — the authorize URL to visit, progress, and any
 error — goes to standard error, so it stays visible on a terminal and out of
@@ -85,7 +85,7 @@ default; a specific released version can be requested instead.
 - A user can complete a full login against a real, protocol-compliant OAuth
   service and end up with that service's token response saved to a file.
 - The saved file contains exactly what the service returned, with nothing
-  added, removed, or reordered by `login`.
+  added, removed, or reordered by `oauth`.
 - The authorize URL, progress, and errors appear on the terminal during a
   redirected run, and never inside the redirected file.
 - A user whose browser does not open can still complete the login using the
