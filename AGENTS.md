@@ -1,4 +1,4 @@
-# oauth-login
+# login
 
 A standalone, provider-agnostic OAuth 2.0 login CLI. It performs the full
 authorization-code + PKCE handshake for any protocol-compliant OAuth service:
@@ -7,12 +7,12 @@ the code, and writes the token endpoint's JSON response **verbatim to stdout**.
 All human-facing output (authorize URL, progress, errors) goes to stderr; a
 failed login exits non-zero. Typical use redirects stdout to a file:
 
-    oauth-login <flags> > ~/.foo/auth.json
+    login <flags> > ~/.foo/auth.json
 
 It holds no provider-specific knowledge. Consumers (e.g. agentkit/agentrepl)
 own credential storage formats, token refresh, and any provider-specific
 enrichment such as extracting claims from returned JWTs. Module path:
-`github.com/ikigenba/oauth-login`.
+`github.com/ikigenba/login`.
 
 ## How changes are made
 
@@ -23,7 +23,7 @@ contracts and `$ralph` for the unattended build workflow.
 
 ## Layout
 
-- `cmd/oauth-login/` — the single binary: flag parsing, composition root.
+- `cmd/login/` — the single binary: flag parsing, composition root.
 - `project/` — the spec (product/design/plan) the build loop works from.
 
 ## Tests
@@ -35,10 +35,10 @@ contracts and `$ralph` for the unattended build workflow.
 ## Versioning
 
 Versions are annotated git tags, `vMAJOR.MINOR.PATCH` — no `VERSION` file. The
-version is derived from the tag, not hand-maintained in source: `cmd/oauth-login`
+version is derived from the tag, not hand-maintained in source: `cmd/login`
 carries `var version = "dev"`, and the build stamps the real value via
 `-ldflags "-X main.version=<v>"` (`make build` uses `git describe --tags
---always --dirty`; goreleaser uses the tag). `oauth-login -V` prints it.
+--always --dirty`; goreleaser uses the tag). `login -V` prints it.
 
 Releasing is manual and human-initiated: cut a release with
 `git tag -a vX.Y.Z -m "vX.Y.Z"` on `main` and push the tag. The first release is

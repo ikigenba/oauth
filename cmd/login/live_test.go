@@ -2,7 +2,7 @@
 
 // Run the live login smoke test with:
 //
-//	go test -tags live ./cmd/oauth-login/ -run TestLiveLogin -v
+//	go test -tags live ./cmd/login/ -run TestLiveLogin -v
 //
 // Set OAUTH_LOGIN_LIVE_AUTH_URL, OAUTH_LOGIN_LIVE_TOKEN_URL,
 // OAUTH_LOGIN_LIVE_CLIENT_ID, OAUTH_LOGIN_LIVE_SCOPE,
@@ -43,10 +43,10 @@ func TestLiveLogin(t *testing.T) {
 		t.Skipf("live login requires these environment variables: %s", strings.Join(missing, ", "))
 	}
 
-	binary := filepath.Join(t.TempDir(), "oauth-login")
+	binary := filepath.Join(t.TempDir(), "login")
 	build := exec.Command("go", "build", "-o", binary, ".")
 	if output, err := build.CombinedOutput(); err != nil {
-		t.Fatalf("build oauth-login: %v\n%s", err, output)
+		t.Fatalf("build login: %v\n%s", err, output)
 	}
 
 	command := exec.Command(binary,
@@ -62,7 +62,7 @@ func TestLiveLogin(t *testing.T) {
 	command.Stdout = &stdout
 	command.Stderr = os.Stderr
 	if err := command.Run(); err != nil {
-		t.Fatalf("oauth-login exited unsuccessfully: %v", err)
+		t.Fatalf("login exited unsuccessfully: %v", err)
 	}
 
 	var response struct {

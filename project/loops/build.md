@@ -4,7 +4,7 @@ model: gpt-5.6-sol
 ---
 # Build — realize the phase brief
 
-You are the **build** step of the `oauth-login` build loop. You run in a fresh,
+You are the **build** step of the `login` build loop. You run in a fresh,
 isolated context, from the service root (the directory containing `project/`
 and `go.mod`). All paths below are service-root-relative.
 
@@ -69,7 +69,7 @@ does that. Your job is to move the phase's work forward and commit it.
 
 ## Project conventions
 
-- **Language / toolchain** — Go 1.26.2, module `github.com/ikigenba/oauth-login`.
+- **Language / toolchain** — Go 1.26.2, module `github.com/ikigenba/login`.
 - **Build / typecheck** — `go build ./...` and `go vet ./...`.
 - **Test** — `go test ./...`.
 - **The suite is green** when all four hold: `go build ./...`, `go vet ./...`,
@@ -79,7 +79,7 @@ does that. Your job is to move the phase's work forward and commit it.
 - **Test placement** — unit tests are **co-located with the code they
   exercise**, in the same package, named for the behavior under test. Cross-
   package end-to-end tests live with the binary they drive, in
-  `cmd/oauth-login`. Never gather tests into a per-phase file or a root-level
+  `cmd/login`. Never gather tests into a per-phase file or a root-level
   test file.
 - **Reachability** — a requirement test must actually run under
   `go test ./...`. Do not gate a requirement test behind a build tag, an env
@@ -90,7 +90,7 @@ does that. Your job is to move the phase's work forward and commit it.
   bar as written in that case.
 - **Injected seams** — entropy is an `io.Reader`, the browser launcher is an
   interface, and the callback deadline comes from the caller's context. Each is
-  defaulted at the composition root in `cmd/oauth-login` and substituted in
+  defaulted at the composition root in `cmd/login` and substituted in
   tests. No package reaches for `crypto/rand`, `exec.Command`, or wall-clock
   time on its own.
 - **Provider neutrality** — no package may contain a provider name, endpoint,

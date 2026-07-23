@@ -1,4 +1,4 @@
-# oauth-login
+# login
 
 A standalone, provider-agnostic OAuth 2.0 login CLI. It runs the full
 authorization-code + PKCE handshake against any protocol-compliant service:
@@ -14,7 +14,7 @@ writes nothing to stdout and exits non-zero.
 
 Prebuilt binary (no Go toolchain needed):
 
-    curl -fsSL https://raw.githubusercontent.com/ikigenba/oauth-login/main/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/ikigenba/login/main/install.sh | sh
 
 Installs the latest release to `~/.local/bin` (override with `BINDIR=/path` or
 `PREFIX=/path`; pin a version with `OAUTH_LOGIN_VERSION=v0.1.0`). Make sure the
@@ -22,15 +22,15 @@ target dir is on your `PATH`.
 
 From source (requires Go):
 
-    make build                 # -> ./bin/oauth-login
-    make install               # -> ~/.local/bin/oauth-login
+    make build                 # -> ./bin/login
+    make install               # -> ~/.local/bin/login
     make install PREFIX=/usr/local
 
-Check the installed version with `oauth-login -V`.
+Check the installed version with `login -V`.
 
 ## Usage
 
-    oauth-login \
+    login \
       --auth-url  https://auth.example.com/oauth/authorize \
       --token-url https://auth.example.com/oauth/token \
       --client-id your-client-id \
@@ -45,4 +45,4 @@ For confidential clients, pass `--client-secret`, or supply an `Authorization`
 header with `--token-header`. Providers that require extra parameters are
 handled with the repeatable `--auth-param` and `--token-param` escape hatches.
 
-Run `oauth-login --help` for the full flag list and a worked example.
+Run `login --help` for the full flag list and a worked example.

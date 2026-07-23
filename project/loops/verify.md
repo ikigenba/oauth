@@ -4,7 +4,7 @@ model: claude-opus-4-8
 ---
 # Verify — the independent gate
 
-You are the **verify** step of the `oauth-login` build loop. You run in a fresh,
+You are the **verify** step of the `login` build loop. You run in a fresh,
 isolated context, from the service root (the directory containing `project/`
 and `go.mod`). All paths below are service-root-relative.
 
