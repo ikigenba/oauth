@@ -10,11 +10,23 @@ flags. Everything meant for a human (the authorize URL, progress, errors) goes
 to stderr, so stdout can be redirected straight to a file. A failed login
 writes nothing to stdout and exits non-zero.
 
-## Build and install
+## Install
+
+Prebuilt binary (no Go toolchain needed):
+
+    curl -fsSL https://raw.githubusercontent.com/ikigenba/oauth-login/main/install.sh | sh
+
+Installs the latest release to `~/.local/bin` (override with `BINDIR=/path` or
+`PREFIX=/path`; pin a version with `OAUTH_LOGIN_VERSION=v0.1.0`). Make sure the
+target dir is on your `PATH`.
+
+From source (requires Go):
 
     make build                 # -> ./bin/oauth-login
     make install               # -> ~/.local/bin/oauth-login
     make install PREFIX=/usr/local
+
+Check the installed version with `oauth-login -V`.
 
 ## Usage
 
