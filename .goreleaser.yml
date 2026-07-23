@@ -1,0 +1,30 @@
+version: 2
+project_name: oauth-login
+
+builds:
+  - id: oauth-login
+    main: ./cmd/oauth-login
+    binary: oauth-login
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w -X main.version={{ .Tag }}
+
+archives:
+  - id: oauth-login
+    formats: [tar.gz]
+    name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: ikigenba
+    name: oauth-login
+
+changelog:
+  use: github
+  sort: asc
