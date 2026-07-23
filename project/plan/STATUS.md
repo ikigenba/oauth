@@ -11,5 +11,7 @@ phase's line and its body file — there is no done marker; done is gone. This
 file deliberately carries no bare status glyph outside phase lines, so the
 anchored grep matches only phase lines.
 
-Next phase: 07
+Next phase: 09
 
+- Phase 07 ⬜ realizes R-9CGI-VDPQ, R-9DOF-95GF, R-9EWB-MX74 — the `-V` version flag and its `--help` line
+- Phase 08 ⬜ realizes — (structural) — build, release, and install tooling (Makefile stamp, install.sh, goreleaser, release workflow)

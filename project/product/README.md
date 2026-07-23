@@ -42,6 +42,13 @@ credentials, choose a file format, refresh or renew tokens, inspect or decode
 what the token response contains, or enrich it with claims. Those belong to the
 consumer, which owns its own credential storage and lifecycle.
 
+## Contractual constants
+
+- **Starting version — `v0.1.0`.** The project carries no version yet; the
+  first release is tagged `v0.1.0`, and versions climb from there as annotated
+  `vMAJOR.MINOR.PATCH` git tags. A binary built outside the release path
+  reports the sentinel `dev` rather than a release number.
+
 ## What we promise (user-facing behavior)
 
 A caller describes the service with flags and receives the token endpoint's
@@ -63,6 +70,16 @@ A login that does not complete successfully reports why on standard error and
 fails, so a calling program or shell script can tell success from failure
 without inspecting the output.
 
+Asking for the version prints the program's version and exits without
+attempting a login. A version request and a login are separate runs, so a
+redirected `> auth.json` only ever receives a token response — never a version
+string mixed in with it.
+
+The program is distributed as a prebuilt binary a user installs with a single
+`curl … | sh`, which fetches the release matching their operating system and
+architecture and drops it on their path. Installing the latest release is the
+default; a specific released version can be requested instead.
+
 ## Success criteria (outcomes)
 
 - A user can complete a full login against a real, protocol-compliant OAuth
@@ -79,3 +96,8 @@ without inspecting the output.
   but is empty is never mistaken for credentials.
 - The same binary logs in against two different, unrelated OAuth services with
   no change other than its flags.
+- A user can ask the program for its version and see it reported, without a
+  login being attempted and without a version string ever landing in a
+  redirected token file.
+- A user can install the program onto their path with a single `curl … | sh`
+  and immediately run it, installing either the latest release or a named one.

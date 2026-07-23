@@ -50,11 +50,22 @@ Facts every Decision leans on.
   exception, with a human-readable reason on stderr. No third code is defined,
   and no failure mode is given its own code: callers distinguish success from
   failure, never one failure from another.
-- **Stream discipline** — stdout carries the token endpoint's response bytes
-  and nothing else, written exactly once, only on the success path. Every
-  human-facing byte (authorize URL, progress, diagnostics, provider error
-  text) goes to stderr. On any failure stdout is never written at all, so a
-  redirected file is left empty rather than holding something credential-shaped.
+- **Stream discipline** — on a **login run**, stdout carries the token
+  endpoint's response bytes and nothing else, written exactly once, only on the
+  success path. Every human-facing byte (authorize URL, progress, diagnostics,
+  provider error text) goes to stderr. On any failure stdout is never written at
+  all, so a redirected file is left empty rather than holding something
+  credential-shaped. The terminal actions short-circuit before any login
+  begins: `-h`/`--help` writes usage to stderr, `-V` writes the version to
+  stdout, and each exits 0. A login run and a `-V` run are mutually exclusive,
+  so a redirected `> auth.json` never receives both a token response and a
+  version string.
+- **Version symbol** — the binary's version is the package-level
+  `var version = "dev"` in `cmd/oauth-login`. The build overrides it via
+  `-ldflags "-X main.version=<v>"`; nothing else assigns it. D6 reads it (the
+  `-V` action); D8 supplies it (the `Makefile` stamps
+  `git describe --tags --always --dirty`, goreleaser stamps the release tag).
+  Unstamped builds keep the `dev` sentinel.
 - **Injected seams** — entropy is an `io.Reader`, the browser launcher is an
   interface, and the callback wait deadline is supplied by the caller. Each is
   defaulted at the composition root in `cmd/oauth-login` and substituted in
