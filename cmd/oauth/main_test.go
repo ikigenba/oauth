@@ -334,6 +334,32 @@ func TestHelpDocumentsCompleteFlagSurfaceAndExamples(t *testing.T) {
 	}
 }
 
+func TestHelpDocumentsXAIWorkedExample(t *testing.T) {
+	// R-VS94-25B6
+	var stdout, stderr bytes.Buffer
+	if got := run(context.Background(), []string{"--help"}, &stdout, &stderr, testDependencies(&fakeLauncher{})); got != 0 {
+		t.Fatalf("help exit=%d", got)
+	}
+	if stdout.Len() != 0 {
+		t.Fatalf("help wrote stdout: %q", stdout.String())
+	}
+	for _, text := range []string{
+		"https://auth.x.ai/oauth2/authorize",
+		"https://auth.x.ai/oauth2/token",
+		"b1a00492-073a-47ea-816f-4c329264a828",
+		"--callback-host 127.0.0.1",
+		"--port 56121",
+		"--callback-path /callback",
+		"grok-cli:access",
+		"api:access",
+		"> x-ai-auth.json",
+	} {
+		if !strings.Contains(stderr.String(), text) {
+			t.Errorf("help does not contain %q", text)
+		}
+	}
+}
+
 func TestCallbackHostMatchesAcrossAuthorizationAndExchange(t *testing.T) {
 	// R-1YID-R9P6
 	for _, host := range []string{"localhost", "127.0.0.1"} {
