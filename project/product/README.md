@@ -37,7 +37,9 @@ response to the caller. Its knowledge of the world is the OAuth protocol
 itself.
 
 It holds **no provider-specific knowledge** — no per-provider defaults,
-endpoints, quirks, or branching. It does nothing else: it does not store
+endpoints, quirks, or branching. `--help` may name real services in worked
+examples; those examples are documentation, not defaults, and a login is still
+described entirely by flags. It does nothing else: it does not store
 credentials, choose a file format, refresh or renew tokens, inspect or decode
 what the token response contains, or enrich it with claims. Those belong to the
 consumer, which owns its own credential storage and lifecycle.
@@ -70,10 +72,13 @@ A login that does not complete successfully reports why on standard error and
 fails, so a calling program or shell script can tell success from failure
 without inspecting the output.
 
-Asking for the version prints the program's version and exits without
-attempting a login. A version request and a login are separate runs, so a
-redirected `> auth.json` only ever receives a token response — never a version
-string mixed in with it.
+Asking for help prints every flag and two copy-paste login examples — one
+for OpenAI and one for xAI — plus the form for sending a Basic authentication
+header, so a user can produce a token file without looking the endpoints up
+elsewhere. Asking for the version prints the program's version and exits
+without attempting a login. A version request and a login are separate runs, so
+a redirected `> auth.json` only ever receives a token response — never a
+version string mixed in with it.
 
 The program is distributed as a prebuilt binary a user installs with a single
 `curl … | sh`, which fetches the release matching their operating system and
@@ -96,6 +101,8 @@ default; a specific released version can be requested instead.
   but is empty is never mistaken for credentials.
 - The same binary logs in against two different, unrelated OAuth services with
   no change other than its flags.
+- A user can copy a complete working OpenAI login and a complete working xAI
+  login from `--help` without looking the endpoints up elsewhere.
 - A user can ask the program for its version and see it reported, without a
   login being attempted and without a version string ever landing in a
   redirected token file.

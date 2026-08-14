@@ -11,5 +11,7 @@ phase's line and its body file — there is no done marker; done is gone. This
 file deliberately carries no bare status glyph outside phase lines, so the
 anchored grep matches only phase lines.
 
-Next phase: 09
+Next phase: 10
+
+- Phase 09 ⬜ realizes D6 — xAI worked example in `--help`
 

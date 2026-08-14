@@ -74,9 +74,9 @@ Facts every Decision leans on.
 - **Provider neutrality** — no package may contain a provider name, endpoint,
   client id, or behavioral branch keyed to a provider. Provider-specific needs
   are met by the generic escape hatches (`--auth-param`, `--token-param`,
-  `--token-header`) or not at all. The single permitted mention of a real
-  provider is the worked example in `--help`, which is documentation rather
-  than behavior.
+  `--token-header`) or not at all. The only permitted mentions of real
+  providers are the worked examples in `--help`, which are documentation
+  rather than behavior.
 
 ## Layout
 

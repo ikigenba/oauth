@@ -27,7 +27,7 @@ change.
 - **D6** → `D06.md` — CLI surface, validation, and the composition root —
   R-1NJA-BC0X, R-1PZ3-2VIB, R-1R6Z-GN90, R-1SEV-UEZP, R-1TMS-86QE,
   R-1UUO-LYH3, R-1W2K-ZQ7S, R-1XAH-DHYH, R-1YID-R9P6, R-1ZQA-51FV,
-  R-20Y6-IT6K, R-9CGI-VDPQ, R-9DOF-95GF, R-9EWB-MX74.
+  R-20Y6-IT6K, R-9CGI-VDPQ, R-9DOF-95GF, R-9EWB-MX74, R-VS94-25B6.
 - **D7** → `D07.md` — Live verification against a real provider — R-2262-WKX9.
 - **D8** → `D08.md` — Build, release, and install tooling — none; structural.
 
@@ -85,4 +85,5 @@ change.
 | R-9CGI-VDPQ | D6 | `D06.md` |
 | R-9DOF-95GF | D6 | `D06.md` |
 | R-9EWB-MX74 | D6 | `D06.md` |
+| R-VS94-25B6 | D6 | `D06.md` |
 </content>

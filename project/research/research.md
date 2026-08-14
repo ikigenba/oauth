@@ -5,7 +5,8 @@ re-deriving. Non-contractual: the build loop never reads this file. It holds
 only the facts the design actually cites, each with its source, so a future
 rewrite does not relitigate them.
 
-Verified against primary sources on 2026-07-18.
+RFC and OpenAI facts verified against primary sources on 2026-07-18. xAI
+example constants verified on 2026-08-13.
 
 ## RFC 7636 — PKCE
 
@@ -66,7 +67,8 @@ against them out of the box with no obvious cause. The RFC's actual safety
 concerns are addressed independently: we bind the loopback interface
 explicitly rather than by name, and we bind both IPv4 and IPv6 as the RFC
 advises, so name-resolution order cannot strand the callback. Users whose
-provider registered the IP literal pass `--callback-host 127.0.0.1`.
+provider registered the IP literal pass `--callback-host 127.0.0.1`. The xAI
+worked example below is that case.
 
 ## RFC 6749 — client authentication
 
@@ -87,9 +89,9 @@ supplied via `--token-header` are mutually exclusive and rejected together at
 flag-parse time, and why a header escape hatch is required at all rather than
 body-only client authentication.
 
-## OpenAI — the worked example in `--help`
+## OpenAI — a worked example in `--help`
 
-The help text carries one concrete, working invocation. Its constants are
+The help text carries a concrete, working OpenAI invocation. Its constants are
 external facts, confirmed across independent sources (the public Codex client
 registration as observed in `openai/codex` issue threads, third-party
 reimplementations, and OpenAI's own Codex authentication documentation
@@ -123,6 +125,34 @@ as the `chatgpt_account_id` claim inside the returned JWTs, under the claim key
 `https://api.openai.com/auth`. Recorded here only to document why
 `oauth` deliberately never parses the token response: the enrichment that
 would be needed is provider-specific, and belongs to the consumer.
+
+## xAI — a worked example in `--help`
+
+The help text carries a second concrete, working invocation, against xAI's
+public grok-cli / Grok Build desktop client. Its constants are external facts,
+confirmed across independent sources: the endpoints and client id baked into
+agentkit's `xai/subscription` package, agentkit research on the grok-cli
+registration, and the scope list observed on a real token-endpoint response
+from that client.
+
+| fact | value |
+|---|---|
+| authorize endpoint | `https://auth.x.ai/oauth2/authorize` |
+| token endpoint | `https://auth.x.ai/oauth2/token` |
+| client id (public grok-cli client) | `b1a00492-073a-47ea-816f-4c329264a828` |
+| registered redirect | `http://127.0.0.1:56121/callback` |
+| scopes | `openid profile email offline_access grok-cli:access api:access` |
+
+The host is the loopback IP literal, the port is fixed at 56121, and the path
+is `/callback`, because the redirect is registered exactly. That is why the
+example passes `--callback-host 127.0.0.1` (the default `localhost` would not
+match) along with `--port` and `--callback-path`. The client is public and
+takes no secret, so the example passes neither `--client-secret` nor
+`--token-header`.
+
+The example redirects to the generic filename `x-ai-auth.json`. Consumer
+default paths (`~/.agentrepl/x-ai-auth.json`, `~/.ralph/x-ai-auth.json`) are
+those programs' policy; `oauth` does not own them.
 
 ## Unconfirmed
 
