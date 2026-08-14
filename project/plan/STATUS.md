@@ -13,5 +13,3 @@ anchored grep matches only phase lines.
 
 Next phase: 10
 
-- Phase 09 ⬜ realizes D6 — xAI worked example in `--help`
-
