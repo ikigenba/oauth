@@ -1,3 +1,6 @@
+> [!WARNING]
+> **This is unsupported AI slop!**
+
 # oauth
 
 A standalone, provider-agnostic OAuth 2.0 login CLI. It runs the full
